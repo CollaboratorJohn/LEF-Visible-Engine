@@ -1,5 +1,4 @@
-#include "CCoordinate.h"
-
+#include "widgets.h"
 
 CCoordinate::CCoordinate() {}
 

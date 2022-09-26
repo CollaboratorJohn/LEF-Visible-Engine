@@ -37,15 +37,13 @@ void CLEF_File::detectCell(std::ifstream & stream, const std::vector<CCell>::ite
 	std::string line;
 	stream >> line;
 	unsigned count = 1;
-	(*cell).setName(line);
+	cell->setName(line);
 	while (stream >> line) {
 		if (line == "PIN" | line == "OBS") {
 			if (line == "PIN")
 				++count;
 			detectLayer(stream, cell);
-		}
-		else
-		{
+		} else {
 			if (line == "END") {
 				--count;
 				if (!count){
@@ -73,14 +71,13 @@ void CLEF_File::detectLayer(std::ifstream & stream, const std::vector<CCell>::it
 		if (line_ == "LAYER" || line == "LAYER"){
 			if (line_ == "LAYER"){
 				line_ = "";
-			}
-			else{
+			} else {
 				stream >> line;
 			}
 			
 			// CLayer& layer = cell.getLayer(line);
-			auto layer = (*cell).getLayerIterator(line);
-			(*layer).setParent(cell);
+			auto layer = cell->getLayerIterator(line);
+			layer->setParent(cell);
 
 			//prepare pin
 			CPin pin;
@@ -89,7 +86,7 @@ void CLEF_File::detectLayer(std::ifstream & stream, const std::vector<CCell>::it
 			pin.setName(pin_name);
 			pin.setLayerName(line);
 			
-			(*layer).addPolygons(pin);
+			layer->addPolygons(pin);
 			detectPin(stream, layer->getPinIterator(), line);
 
 			if (line == "LAYER") {
@@ -99,8 +96,7 @@ void CLEF_File::detectLayer(std::ifstream & stream, const std::vector<CCell>::it
 			if (line == "END") {
 				return;
 			}
-		}
-		else{
+		} else {
 			if (line == "END")
 				return;
 		}
@@ -128,7 +124,10 @@ void CLEF_File::detectPin(std::ifstream & stream, const std::vector<CPin>::itera
 
 			newRectangle.setDL(dl);
 			newRectangle.setUR(ur);
-			(*pin).addPolygon(newRectangle);
+			pin->addPolygon(newRectangle);
+
+			auto rect = pin->getRectIterator();
+			HashRect::getInstance()->setRectHash(rect);
 		}
 		else {
 			if (line == "LAYER" || line == "END") {

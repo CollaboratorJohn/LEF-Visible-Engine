@@ -20,7 +20,7 @@ const std::string& CLayer::getName() const {
 	return m_layer_name;
 }
 
-const std::vector<CCell>::iterator CLayer::getParentCell() const {
+const std::vector<CCell>::iterator CLayer::getParent() const {
 	return parent;
 }
 
@@ -61,4 +61,8 @@ double CLayer::overlapArea() {
 
 polygon CLayer::getPolygon(){
 	return m_overlap_polygon;
+}
+
+void CLayer::printNames() {
+	std::cout<<"Layer name "<<m_layer_name<<std::endl;
 }

@@ -12,6 +12,10 @@ void CRectangle::setParent(const std::vector<CPin>::iterator pin) {
 	parent = pin;
 }
 
+void CRectangle::setId(std::string & id_) {
+	id = id_;
+}
+
 void CRectangle::setDL(CCoordinate & dl) {
 	m_dl = dl;
 }
@@ -20,12 +24,16 @@ void CRectangle::setUR(CCoordinate & ur) {
 	m_ur = ur;
 }
 
+const std::vector<CPin>::iterator CRectangle::getParent() const {
+	return parent;
+}
+
 double CRectangle::area() const{
 	return std::abs(m_ur.getY() - m_dl.getY())*std::abs(m_ur.getX() - m_dl.getX());
 }
 
 void CRectangle::printNames(){
-	std::cout << "          Rect   " << m_dl.getX() << " " << m_dl.getY() << " " << m_ur.getX() << " " << m_ur.getY() << "     " << area() << std::endl;
+	std::cout << "Rect   " << m_dl.getX() << " " << m_dl.getY() << " " << m_ur.getX() << " " << m_ur.getY() << "     " << area() << std::endl;
 }
 
 void CRectangle::createPolygon()

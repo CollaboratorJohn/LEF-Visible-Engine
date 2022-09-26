@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include <map>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
@@ -27,6 +28,7 @@ class CLayer;
 class CDesign;
 class CCoordinate;
 class CCell;
+class HashRect;
 
 // CPin
 class CPin {
@@ -40,7 +42,9 @@ public:
 	double area() const;
 	double overlapArea();
 	polygon getPolygon();
+	const std::vector<CRectangle>::iterator getRectIterator();
 	void printNames();
+	const std::vector<CLayer>::iterator getParent() const;
 private:
 	std::vector<CLayer>::iterator parent;
 	std::string m_layer_name;
@@ -72,15 +76,18 @@ public:
 	~CRectangle();
 	void setName(std::string &);
 	void setParent(const std::vector<CPin>::iterator pin);
+	void setId(std::string &);
 	void setDL(CCoordinate &);
 	void setUR(CCoordinate &);
 	double area() const;
 	void createPolygon();
 	polygon getPolygon();
 	void printNames();
+	const std::vector<CPin>::iterator getParent() const;
 private:
 	std::vector<CPin>::iterator parent;
 	std::string m_layer_name;
+	std::string id;
 	CCoordinate m_dl;
 	CCoordinate m_ur;
 	polygon m_poly;
@@ -95,11 +102,12 @@ public:
 	void setParent(const std::vector<CCell>::iterator);
 	void addPolygons(const CPin &);
 	const std::string& getName() const;
-	const std::vector<CCell>::iterator getParentCell() const;
 	const std::vector<CPin>::iterator getPinIterator();
 	double area() const;
 	double overlapArea();
 	polygon getPolygon();
+	void printNames();
+	const std::vector<CCell>::iterator getParent() const;
 private:
 	std::vector<CCell>::iterator parent;
 	std::string m_layer_name;
@@ -142,4 +150,19 @@ private:
 	std::string m_cell_name;
 	std::vector<CLayer> m_layers;
 };
+
+// HashRect
+class HashRect {
+public:
+	std::string setRectHash(std::vector<CRectangle>::iterator);
+	static HashRect* getInstance();
+	void findRectHashInfo(std::string);
+private:
+	HashRect();
+	~HashRect();
+	std::string hashStrGenerator();
+	std::map<std::string, std::vector<CRectangle>::iterator> hash_rect_map;
+	static HashRect* instance;
+};
+
 #endif

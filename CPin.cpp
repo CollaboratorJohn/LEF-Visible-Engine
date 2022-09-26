@@ -15,6 +15,10 @@ void CPin::setParent(const std::vector<CLayer>::iterator layer) {
 	parent = layer;
 }
 
+const std::vector<CLayer>::iterator CPin::getParent() const {
+	return parent;
+}
+
 void CPin::addPolygon(CRectangle & newItem) {
 	m_polygons.push_back(newItem);
 }
@@ -55,8 +59,12 @@ polygon CPin::getPolygon() {
 	return m_overlap_polygon;
 }
 
+const std::vector<CRectangle>::iterator CPin::getRectIterator() {
+	return m_polygons.begin()+m_polygons.size()-1;
+}
+
 void CPin::printNames(){
-	std::cout << "        " << m_pin_name << "  " << m_layer_name << "  " << area() << std::endl;
+	std::cout << m_pin_name << "  " << m_layer_name << "  " << area() << std::endl;
 	for (int i = 0; i < m_polygons.size(); ++i)
 		m_polygons[i].printNames();
 }

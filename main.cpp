@@ -9,7 +9,6 @@ bool has_suffix(const std::string &str, const std::string &suffix) {
 }
 
 int main(int argc, char *argv[]) {
-
 	if (argc > 1) {
 		CDesign* designPtr = new CDesign();
 		unsigned lefFileCount=0;
@@ -23,7 +22,10 @@ int main(int argc, char *argv[]) {
 			        lefFile.setFilePath(argv[i]);
 				    lefFile.parse(designPtr);
 					++lefFileCount;
-					std::cout<<"find lef!"<<std::endl;
+					
+					std::string id;
+					std::cin>>id;
+					HashRect::getInstance()->findRectHashInfo(id);
 			}
             // else if (has_suffix(argv[i], "def")) {
 			// 	    defFile.setFilePath(argv[i]);

@@ -1,6 +1,6 @@
 COMPILER = g++
 TARGET = lef_def_parser
-OBJS = main.o CCell.o CCoordinate.o CDesign.o CLayer.o CPin.o CLEF_File.o CRectangle.o
+OBJS = main.o CCell.o CCoordinate.o CDesign.o CLayer.o CPin.o CLEF_File.o CRectangle.o HashRect.o
 
 $(TARGET): $(OBJS)
 	$(COMPILER) -o $(TARGET) $(OBJS)
@@ -10,6 +10,9 @@ main.o: main.cpp CLEF_File.h widgets.h
 
 CLEF_File.o: CLEF_File.cpp CLEF_File.h
 	$(COMPILER) -c CLEF_File.cpp -o CLEF_File.o -std=c++14
+
+HashRect.o: HashRect.cpp widgets.h 
+	$(COMPILER) -c HashRect.cpp -o HashRect.o -std=c++14
 
 CCell.o: CCell.cpp widgets.h
 	$(COMPILER) -c CCell.cpp -o CCell.o -std=c++14
