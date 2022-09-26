@@ -130,7 +130,6 @@ public:
 	void setName(std::string &);
 	const std::string& getName() const;
 	void addLayer(CLayer & newLayer);
-	// CLayer& getLayer(const std::string &);
 	const std::vector<CLayer>::iterator getLayerIterator(const std::string& layerName);
 	void printNames();
 	double getCellArea() const;

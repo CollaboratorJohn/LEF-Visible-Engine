@@ -1,15 +1,12 @@
 #include <vector>
 #include <stdlib.h>
 #include "CLEF_File.h"
-// #include "CDEF_File.h"
-
 
 bool has_suffix(const std::string &str, const std::string &suffix) {
 	unsigned pos = str.find_last_of('\\');
 	return str.substr(pos+1).size() - suffix.size()>=2 &&
 		str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
 }
-
 
 int main(int argc, char *argv[]) {
 
