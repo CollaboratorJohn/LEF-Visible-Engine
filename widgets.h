@@ -15,12 +15,14 @@
 #include <boost/geometry/geometries/polygon.hpp>
 #include <boost/geometry/io/wkt/wkt.hpp>
 #include <boost/foreach.hpp>
+#include <boost/property_tree/ptree.hpp>
 
 //declear
 namespace bg = boost::geometry;
 typedef bg::model::d2::point_xy<double> boost_point;
 typedef bg::model::polygon<boost_point> boost_polygon;
 typedef boost::geometry::model::polygon<boost::geometry::model::d2::point_xy<double> > polygon;
+typedef boost::property_tree::ptree node;
 
 class CPin;
 class CRectangle;
@@ -125,8 +127,8 @@ public:
 	int findCell(const std::string&) const;
 	double getAreaByCellName(const std::string &);
 	const std::vector<CCell>::iterator getCellIterator();
-
 protected:
+	node root;
 	std::vector<CCell> m_design;
 };
 

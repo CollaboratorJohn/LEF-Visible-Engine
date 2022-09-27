@@ -33,7 +33,7 @@ void CLEF_File::parse(CDesign* design) const {
 	}
 }
 
-void CLEF_File::detectCell(std::ifstream & stream, const std::vector<CCell>::iterator cell)const {
+void CLEF_File::detectCell(std::ifstream &  , const std::vector<CCell>::iterator cell)const {
 	std::string line;
 	stream >> line;
 	unsigned count = 1;
